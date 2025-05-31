@@ -31,4 +31,17 @@ public class TaskDaoTest {
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(task);
     }
+
+    @Test
+    public void testUpdateTaskShouldReturnTheUpdatedTask(){
+        Task task = TestDataUtil.createTask1();
+        taskDaoImpl.create(task);
+
+        task.setTitle("New title");
+        taskDaoImpl.update(task);
+
+        Task result = taskDaoImpl.update(task);
+        assertThat(result).isEqualTo(task);
+
+    }
 }

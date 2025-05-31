@@ -10,4 +10,6 @@ public interface TaskDao {
     Optional<Task> findOne(int taskId);
     List<Task> findAll();
 
+    Task update(Task task);
+
 }

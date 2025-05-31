@@ -27,4 +27,12 @@ public class TaskDaoImpl implements TaskDao {
     public List<Task> findAll() {
         return this.database;
     }
+
+    @Override
+    public Task update(Task task) {
+        Optional<Task> oldTask = this.database.stream().filter(old-> old.getId() == task.getId()).findFirst();
+        this.database.set(this.database.indexOf(oldTask.get()), task); // update
+
+        return this.database.get(this.database.indexOf(oldTask.get()));
+    }
 }
