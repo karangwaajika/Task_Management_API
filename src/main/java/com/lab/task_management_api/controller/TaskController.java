@@ -1,5 +1,8 @@
 package com.lab.task_management_api.controller;
 
+import com.lab.task_management_api.exception.InvalidTaskIdException;
+import com.lab.task_management_api.exception.InvalidTaskStatusException;
+import com.lab.task_management_api.exception.TaskFieldNotEmptyException;
 import com.lab.task_management_api.model.Task;
 import com.lab.task_management_api.service.TaskService;
 import com.lab.task_management_api.service.impl.TaskServiceImpl;
@@ -21,7 +24,23 @@ public class TaskController {
 
     @PostMapping(name = "add_task", path = "")
     public Map<String, String> createTask(@RequestBody Task task){
-        this.taskService.createTask(task);
+        try{
+            if(task.getTitle().isBlank()){
+                throw new TaskFieldNotEmptyException("Title cannot be empty");
+            }
+            if(task.getDescription().isBlank()){
+                throw new TaskFieldNotEmptyException("Description cannot be empty");
+            }
+            if(task.getId() <= 0){
+                throw new InvalidTaskIdException("Id cannot less than or equal to zero");
+            }
+            if(task.getStatus() <= 0 || task.getStatus() > 3){
+                throw new InvalidTaskStatusException("status must be between 1 and 3");
+            }
+            this.taskService.createTask(task);
+        }catch (TaskFieldNotEmptyException | InvalidTaskIdException | InvalidTaskStatusException e){
+           return Map.of("message", e.getMessage());
+        }
 
         return Map.of("message", "Task created successfully");
     }
