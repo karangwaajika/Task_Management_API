@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Component
 public class TaskDaoImpl implements TaskDao {
-    List<Task> database;
+    private final List<Task> database;
     public TaskDaoImpl(List<Task> database) {
         this.database = database;
     }
