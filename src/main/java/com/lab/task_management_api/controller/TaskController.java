@@ -3,6 +3,7 @@ package com.lab.task_management_api.controller;
 import com.lab.task_management_api.model.Task;
 import com.lab.task_management_api.service.TaskService;
 import com.lab.task_management_api.service.impl.TaskServiceImpl;
+import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class TaskController {
 
     @PostMapping(name = "add_task", path = "")
     public Map<String, String> createTask(@RequestBody Task task){
-        taskService.createTask(task);
+        this.taskService.createTask(task);
 
         return Map.of("message", "Task created successfully");
     }
@@ -37,8 +38,17 @@ public class TaskController {
 
     @PutMapping(name = "update_task", path = "/{id}")
     public Task updateTask(@RequestBody Task task, @PathVariable int id){
-        System.out.println(task);
-        return taskService.updateTask(task, id);
+        return this.taskService.updateTask(task, id);
+    }
+
+    @PutMapping(name = "update_task_progress", path = "/progress")
+    public Task updateTaskProgress(@RequestParam int taskId, @RequestParam int status){
+        return this.taskService.updateTaskProgress(taskId, status);
+    }
+
+    @GetMapping(name = "filter_task", path = "/status/{status}")
+    public List<Task> filterTask(@PathVariable int status){
+        return this.taskService.filterTaskStatus(status);
     }
 
 }
