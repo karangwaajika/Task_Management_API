@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Task {
-    int id;
-    String title;
-    String description;
-    int status; // 1: not started, 2: on going, 3: completed
+    private int id;
+    private String title;
+    private String description;
+    private int status; // 1: not started, 2: on going, 3: completed
 }

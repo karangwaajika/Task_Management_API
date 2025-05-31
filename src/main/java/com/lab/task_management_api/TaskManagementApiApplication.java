@@ -1,5 +1,7 @@
 package com.lab.task_management_api;
 
+import com.lab.task_management_api.dao.TaskDao;
+import com.lab.task_management_api.model.Task;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
