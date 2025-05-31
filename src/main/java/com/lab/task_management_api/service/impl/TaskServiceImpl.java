@@ -46,4 +46,9 @@ public class TaskServiceImpl implements TaskService {
         return taskDao.filterStatus(status);
     }
 
+    @Override
+    public Task deleteTask(int taskId) {
+        return taskDao.delete(taskId);
+    }
+
 }

@@ -12,4 +12,5 @@ public interface TaskService {
     Task updateTask(Task task, int taskId);
     Task updateTaskProgress(int taskId, int status);
     List<Task> filterTaskStatus(int status);
+    Task deleteTask(int taskId);
 }

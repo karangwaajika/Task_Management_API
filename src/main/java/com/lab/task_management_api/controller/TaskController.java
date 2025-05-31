@@ -51,4 +51,9 @@ public class TaskController {
         return this.taskService.filterTaskStatus(status);
     }
 
+    @DeleteMapping(name = "delete_task", path = "/{id}")
+    public Task deleteTask(@PathVariable int id){
+        return this.taskService.deleteTask(id);
+    }
+
 }

@@ -49,4 +49,10 @@ public class TaskDaoImpl implements TaskDao {
     public List<Task> filterStatus(int status) {
         return this.database.stream().filter(task->task.getStatus() == status).toList();
     }
+
+    @Override
+    public Task delete(int taskId) {
+        Optional<Task> oldTask = this.database.stream().filter(old-> old.getId() == taskId).findFirst();
+        return this.database.remove(this.database.indexOf(oldTask.get()));
+    }
 }
