@@ -28,8 +28,14 @@ public class TaskServiceImpl implements TaskService {
         return taskDao.findAll();
     }
 
-    public Task updateTask(Task task){
-        return taskDao.update(task);
+    public Task updateTask(Task task, int taskId){
+        Optional<Task> oldTask = taskDao.findOne(taskId);
+
+        oldTask.get().setStatus(task.getStatus());
+        oldTask.get().setDescription(task.getDescription());
+        oldTask.get().setTitle(task.getTitle());
+
+        return taskDao.update(oldTask.get());
     }
 
     public Task updateTaskProgress(int taskId, int status){

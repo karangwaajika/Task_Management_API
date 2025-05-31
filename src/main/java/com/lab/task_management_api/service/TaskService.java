@@ -9,7 +9,7 @@ public interface TaskService {
     void createTask(Task task);
     Optional<Task> retrieveTask(int taskId);
     List<Task> retrieveAllTasks();
-    Task updateTask(Task task);
+    Task updateTask(Task task, int taskId);
     Task updateTaskProgress(int taskId, int status);
     List<Task> filterTaskStatus(int status);
 }
