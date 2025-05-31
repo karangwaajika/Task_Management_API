@@ -44,4 +44,9 @@ public class TaskDaoImpl implements TaskDao {
 
         return this.database.get(this.database.indexOf(oldTask.get()));
     }
+
+    @Override
+    public List<Task> filterStatus(int status) {
+        return this.database.stream().filter(task->task.getStatus() == status).toList();
+    }
 }

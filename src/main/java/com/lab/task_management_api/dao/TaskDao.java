@@ -11,5 +11,6 @@ public interface TaskDao {
     List<Task> findAll();
     Task update(Task task);
     Task updateProgress(int taskId, int status);
+    List<Task> filterStatus(int status);
 
 }
