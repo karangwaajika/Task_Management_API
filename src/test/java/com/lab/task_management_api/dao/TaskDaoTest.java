@@ -38,9 +38,20 @@ public class TaskDaoTest {
         taskDaoImpl.create(task);
 
         task.setTitle("New title");
-        taskDaoImpl.update(task);
 
         Task result = taskDaoImpl.update(task);
+        assertThat(result).isEqualTo(task);
+
+    }
+
+    @Test
+    public void testUpdateTaskProgressShouldReturnTheUpdatedTask(){
+        Task task = TestDataUtil.createTask1();
+        taskDaoImpl.create(task);
+
+        task.setStatus(3);
+
+        Task result = taskDaoImpl.updateProgress(task.getId(), 3);
         assertThat(result).isEqualTo(task);
 
     }

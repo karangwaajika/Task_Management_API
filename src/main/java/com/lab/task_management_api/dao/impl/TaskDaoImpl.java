@@ -35,4 +35,13 @@ public class TaskDaoImpl implements TaskDao {
 
         return this.database.get(this.database.indexOf(oldTask.get()));
     }
+
+    @Override
+    public Task updateProgress(int taskId, int status) {
+        Optional<Task> oldTask = this.database.stream().filter(old-> old.getId() == taskId).findFirst();
+        oldTask.get().setStatus(status); // update status field
+        this.database.set(this.database.indexOf(oldTask.get()), oldTask.get()); // update
+
+        return this.database.get(this.database.indexOf(oldTask.get()));
+    }
 }
