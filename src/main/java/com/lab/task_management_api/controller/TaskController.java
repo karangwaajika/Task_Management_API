@@ -2,11 +2,13 @@ package com.lab.task_management_api.controller;
 
 import com.lab.task_management_api.exception.InvalidTaskIdException;
 import com.lab.task_management_api.exception.InvalidTaskStatusException;
+import com.lab.task_management_api.exception.TaskExistException;
 import com.lab.task_management_api.exception.TaskFieldNotEmptyException;
 import com.lab.task_management_api.model.Task;
 import com.lab.task_management_api.service.TaskService;
 import com.lab.task_management_api.service.impl.TaskServiceImpl;
 import jakarta.websocket.server.PathParam;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,8 +40,9 @@ public class TaskController {
                 throw new InvalidTaskStatusException("status must be between 1 and 3");
             }
             this.taskService.createTask(task);
-        }catch (TaskFieldNotEmptyException | InvalidTaskIdException | InvalidTaskStatusException e){
-           return Map.of("message", e.getMessage());
+        }catch (TaskFieldNotEmptyException | InvalidTaskIdException |
+                InvalidTaskStatusException | TaskExistException e){
+           return Map.of("error", e.getMessage());
         }
 
         return Map.of("message", "Task created successfully");
@@ -51,8 +54,9 @@ public class TaskController {
     }
 
     @GetMapping(name = "view_one_task", path = "/{id}")
-    public Optional<Task> viewOneTask(@PathVariable int id){
-        return this.taskService.retrieveTask(id);
+    public ResponseEntity<?> viewOneTask(@PathVariable int id){
+        Optional<Task> task = this.taskService.retrieveTask(id);
+        return ResponseEntity.ok(task);
     }
 
     @PutMapping(name = "update_task", path = "/{id}")

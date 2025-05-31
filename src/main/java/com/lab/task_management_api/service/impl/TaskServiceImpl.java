@@ -1,6 +1,8 @@
 package com.lab.task_management_api.service.impl;
 
 import com.lab.task_management_api.dao.TaskDao;
+import com.lab.task_management_api.exception.TaskExistException;
+import com.lab.task_management_api.exception.TaskNotFoundException;
 import com.lab.task_management_api.model.Task;
 import com.lab.task_management_api.service.TaskService;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public void createTask(Task task){
+        if(taskDao.findOne(task.getId()).isPresent()){
+            throw new TaskExistException("Task already exist");
+        }
         this.taskDao.create(task);
     }
 
     public Optional<Task> retrieveTask(int taskId){
+        if(taskDao.findOne(taskId).isEmpty()){
+           throw new TaskNotFoundException("Task with id "+taskId+ " not found !!");
+        }
         return taskDao.findOne(taskId);
     }
 
