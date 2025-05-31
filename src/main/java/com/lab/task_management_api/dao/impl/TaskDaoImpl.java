@@ -2,9 +2,12 @@ package com.lab.task_management_api.dao.impl;
 
 import com.lab.task_management_api.dao.TaskDao;
 import com.lab.task_management_api.model.Task;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
+@Component
 public class TaskDaoImpl implements TaskDao {
     List<Task> database;
     public TaskDaoImpl(List<Task> database) {
@@ -13,5 +16,10 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public void create(Task task) {
         this.database.add(task);
+    }
+
+    @Override
+    public Optional<Task> findOne(int taskId) {
+        return this.database.stream().filter(task-> task.getId() == taskId).findFirst();
     }
 }
