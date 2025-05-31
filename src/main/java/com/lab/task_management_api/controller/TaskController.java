@@ -54,19 +54,21 @@ public class TaskController {
     }
 
     @GetMapping(name = "view_one_task", path = "/{id}")
-    public ResponseEntity<?> viewOneTask(@PathVariable int id){
+    public ResponseEntity<Optional<Task>> viewOneTask(@PathVariable int id){
         Optional<Task> task = this.taskService.retrieveTask(id);
         return ResponseEntity.ok(task);
     }
 
     @PutMapping(name = "update_task", path = "/{id}")
-    public Task updateTask(@RequestBody Task task, @PathVariable int id){
-        return this.taskService.updateTask(task, id);
+    public ResponseEntity<Task> updateTask(@RequestBody Task task, @PathVariable int id){
+        Task updatedTask = this.taskService.updateTask(task, id);
+        return ResponseEntity.ok(updatedTask);
     }
 
     @PutMapping(name = "update_task_progress", path = "/progress")
-    public Task updateTaskProgress(@RequestParam int taskId, @RequestParam int status){
-        return this.taskService.updateTaskProgress(taskId, status);
+    public ResponseEntity<Task> updateTaskProgress(@RequestParam int taskId, @RequestParam int status){
+        Task task = this.taskService.updateTaskProgress(taskId, status);
+        return ResponseEntity.ok(task);
     }
 
     @GetMapping(name = "filter_task", path = "/status/{status}")
@@ -75,8 +77,9 @@ public class TaskController {
     }
 
     @DeleteMapping(name = "delete_task", path = "/{id}")
-    public Task deleteTask(@PathVariable int id){
-        return this.taskService.deleteTask(id);
+    public ResponseEntity<Task> deleteTask(@PathVariable int id){
+        Task task = this.taskService.deleteTask(id);
+        return ResponseEntity.ok(task);
     }
 
 }

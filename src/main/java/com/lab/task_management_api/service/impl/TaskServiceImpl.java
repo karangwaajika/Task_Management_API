@@ -37,6 +37,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Task updateTask(Task task, int taskId){
+        if(taskDao.findOne(taskId).isEmpty()){
+            throw new TaskNotFoundException("Task with id "+taskId+ " not found !!");
+        }
         Optional<Task> oldTask = taskDao.findOne(taskId);
 
         oldTask.get().setStatus(task.getStatus());
@@ -47,6 +50,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Task updateTaskProgress(int taskId, int status){
+        if(taskDao.findOne(taskId).isEmpty()){
+            throw new TaskNotFoundException("Task with id "+taskId+ " not found !!");
+        }
         return taskDao.updateProgress(taskId, status);
     }
 
@@ -56,6 +62,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task deleteTask(int taskId) {
+        if(taskDao.findOne(taskId).isEmpty()){
+            throw new TaskNotFoundException("Task with id "+taskId+ " not found !!");
+        }
         return taskDao.delete(taskId);
     }
 
