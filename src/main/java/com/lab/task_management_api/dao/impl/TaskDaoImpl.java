@@ -22,4 +22,9 @@ public class TaskDaoImpl implements TaskDao {
     public Optional<Task> findOne(int taskId) {
         return this.database.stream().filter(task-> task.getId() == taskId).findFirst();
     }
+
+    @Override
+    public List<Task> findAll() {
+        return this.database;
+    }
 }
