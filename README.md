@@ -7,31 +7,37 @@
 ![GitHub file size in bytes](https://img.shields.io/github/size/karangwaajika/codeOfAfrica-challenges/index.html)
 
 
-This lab evolves around developing a web application using Java frameworks.
-The aim is to understand Java Web Development using Servlets/JSP, getting familiar with Restful API.
+This lab evolves around developing a web application using Spring boot frameworks.
+To have a hands-on experience with modern Java web application development understand 
+the foundations of building and deploying Spring-based applications.
 
 ## Video
 
-* Final Project: https://screenrec.com/share/qYIBvsu5FR
+* Final Project: <a href="https://screenrec.com/share/jq8WAzS1rX"> Available here!</a>
+
+## Diagram
+* Component diagram: <a href="https://drive.google.com/file/d/1_ltTqN6KSubbTDNp-c-W7sVSpbAdLDPH/view?usp=sharing">Available here</a>
+  <img src="image/componentDiagram.png" alt="drawing" style="height:250px; width: 1000px"/>
 
 ## Usage
-
-* ERD design: https://drive.google.com/file/d/1yx91iDzRJZj91rGV1AZgFM__RQeRkDOn/view?usp=sharing
-* JSP File: Interacting with the app
-    - Inside webapp there is jsp which holds all the jsp pages
-    - static director is where CSS and Images is located
-    - NB: for now the front-end is not implemented only the backend.
 * Backend codes: Logic behind (MVC Architecture)
-    - controller directory handle http request and response
-    - dao is where sql query is implemented
-    - model holds all project classes
+    - controller handle http request and response
+    - dao is where collection methods or functionalities are implemented
+    - model holds project classes
     - service has the business logic
-    - util connect the project with the database
+    - config create a singleton object for the collection.
+    - exception handle custom exceptions
+* Interactions between components:
+    - Client ↔ Controller: HTTP requests and responses
+    - Controller → Service: Invokes business logic methods
+    - Service → Repository: Queries or updates data
+    - Repository → Database: Executes SQL queries
+    - Client ↔ Postman: View and test API endpoints
 
 ## Expected Learning Outcomes
 
-- Understand Java Web Development using Servlets/JSP or Spring/Thymeleaf.
-- Build a functional CRUD web application with proper HTTP handling.
-- Implement RESTful APIs and handle client-server interactions.
-- Apply MVC architecture for better project structure.
-- Work with dynamic content rendering in JSP or Thymeleaf.
+- Understand and explain the purpose of Spring and Spring Boot.
+- Demonstrate the use of IoC and DI using Spring.
+- Develop a RESTful API using Spring MVC.
+- Package and run a Spring Boot app inside a Docker container.
+- Apply software engineering practices like separation of concerns and layered architecture.
