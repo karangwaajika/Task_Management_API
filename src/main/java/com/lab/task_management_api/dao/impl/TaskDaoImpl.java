@@ -31,8 +31,10 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public Task update(Task task) {
         Optional<Task> oldTask = this.database.stream().filter(old-> old.getId() == task.getId()).findFirst();
+        if(oldTask.isEmpty()){
+            return null;
+        }
         this.database.set(this.database.indexOf(oldTask.get()), task); // update
-
         return this.database.get(this.database.indexOf(oldTask.get()));
     }
 
